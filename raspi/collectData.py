@@ -14,7 +14,6 @@ sys.stderr = open(os.devnull, 'w')
 audio = pyaudio.PyAudio()
 sys.stderr = sys.__stderr__
 
-
 for i in range(audio.get_device_count()):
     info = audio.get_device_info_by_index(i)
     print(f"Device {i}: {info['name']}")
@@ -25,9 +24,10 @@ DEVICE_INDEX = 2
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
 
+SECONDS = 1
 RATE = 44100
 CHUNK = 1024  # Number of frames per buffer
-SAMPLES_TO_COLLECT = 44100 * 1 # 10 seconds of data
+SAMPLES_TO_COLLECT = 44100 * SECONDS # 10 seconds of data
 OUTPUT_WAV_DIRECTORY = os.path.dirname(os.path.abspath(__file__)) + "/output/wav/"
 OUTPUT_META_DIRECTORY = os.path.dirname(os.path.abspath(__file__)) + "/output/metadata/"
 
