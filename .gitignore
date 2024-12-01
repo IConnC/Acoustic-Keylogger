@@ -2,3 +2,4 @@ training/MKA datasets/
 .venv-raspi/
 raspi/output
 victim/output
+data-manipulation/input
