@@ -81,11 +81,11 @@ def record():
         while not DONE.is_set():
             frames = []
             print("Recording...")
-            start_time_ns = time.time_ns()
+            start_time_ms = int(time.time() * 1000)
             read_audio_stream(stream, frames, num_chunks, remainder_samples)
-            end_time_ns = time.time_ns()
+            end_time_ms = int(time.time() * 1000)
             print("Recording finished.")
-            executor.submit(write_results, frames.copy(), start_time_ns, end_time_ns)
+            executor.submit(write_results, frames.copy(), start_time_ms, end_time_ms)
 
     except KeyboardInterrupt:
         print("Recording interrupted. Cleaning up...")
