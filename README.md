@@ -1,8 +1,5 @@
 
-
-
 # MKA Dataset Info
-
 
 ## Longer than 1 second
 ./MKA datasets/hp/Sound Segment(wav)/dash/dash(-)(4).wav
@@ -11,6 +8,15 @@
 ./MKA datasets/hp/Sound Segment(wav)/right/right6.wav
 
 100 ms of recordings -> latency
+
+
+# TODO
+1. Keylogger data collection
+2. Splice keylogger and audio recorder data
+3. Preprocess audio for supplementary data
+4. 
+
+
 
 # Project Segments
 
