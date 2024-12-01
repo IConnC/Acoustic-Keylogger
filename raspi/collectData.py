@@ -4,7 +4,7 @@ import pyaudio
 import wave
 import numpy as np
 import time
-import datetime
+from datetime import datetime
 
 import threading
 from concurrent.futures import ThreadPoolExecutor
@@ -20,7 +20,8 @@ for i in range(audio.get_device_count()):
     print(f"  Sample Rate: {info['defaultSampleRate']}")
     print(f"  Max Input Channels: {info['maxInputChannels']}\n")
 
-DEVICE_INDEX = 2
+
+DEVICE_INDEX = 1
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
 
@@ -30,6 +31,9 @@ CHUNK = 1024  # Number of frames per buffer
 SAMPLES_TO_COLLECT = 44100 * SECONDS # 10 seconds of data
 OUTPUT_WAV_DIRECTORY = os.path.dirname(os.path.abspath(__file__)) + "/output/wav/"
 OUTPUT_META_DIRECTORY = os.path.dirname(os.path.abspath(__file__)) + "/output/metadata/"
+
+print("Using device: ", audio.get_device_info_by_index(DEVICE_INDEX))
+
 
 # Multithreading setup
 executor = ThreadPoolExecutor(max_workers=3)
@@ -45,17 +49,21 @@ def exit_listener(stop_command="stop"):
 
 
 def read_audio_stream(stream, frames, num_chunks, remainder_samples):
-    for _ in range(num_chunks):
-        data = stream.read(CHUNK, exception_on_overflow=False)
-        frames.append(data)
+    try:
+        for _ in range(num_chunks):
+            data = stream.read(CHUNK, exception_on_overflow=False)
+            frames.append(data)
 
-    if remainder_samples > 0:
-        data = stream.read(remainder_samples, exception_on_overflow=False)
-        frames.append(data)
+        if remainder_samples > 0:
+            data = stream.read(remainder_samples, exception_on_overflow=False)
+            frames.append(data)
+    except:
+        print("Failed reading audio stream")
+        exit(1)
 
 
-def write_results(frames, start_time_ns, end_time_ns):
-    filename = OUTPUT_WAV_DIRECTORY + str(start_time_ns) + "-" + str(end_time_ns) + ".wav"
+def write_results(frames, start_time_dt, end_time_dt):
+    filename = f"{OUTPUT_WAV_DIRECTORY}{start_time_dt.timestamp()}-{end_time_dt.timestamp()}.wav"
     with wave.open(filename, 'wb') as wf:
         wf.setnchannels(CHANNELS)
         wf.setsampwidth(audio.get_sample_size(FORMAT))
@@ -81,11 +89,11 @@ def record():
         while not DONE.is_set():
             frames = []
             print("Recording...")
-            start_time_ms = int(time.time() * 1000)
+            start_time_dt = datetime.now()
             read_audio_stream(stream, frames, num_chunks, remainder_samples)
-            end_time_ms = int(time.time() * 1000)
+            end_time_dt = datetime.now()
+            executor.submit(write_results, frames.copy(), start_time_dt, end_time_dt)
             print("Recording finished.")
-            executor.submit(write_results, frames.copy(), start_time_ms, end_time_ms)
 
     except KeyboardInterrupt:
         print("Recording interrupted. Cleaning up...")
