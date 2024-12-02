@@ -31,6 +31,9 @@ CHUNK = 1024  # Number of frames per buffer
 SAMPLES_TO_COLLECT = 44100 * SECONDS # 10 seconds of data
 OUTPUT_WAV_DIRECTORY = os.path.dirname(os.path.abspath(__file__)) + "/output/"
 
+if not os.path.exists(OUTPUT_WAV_DIRECTORY):
+    os.makedirs(OUTPUT_WAV_DIRECTORY)
+
 print("Using device: ", audio.get_device_info_by_index(DEVICE_INDEX))
 
 
