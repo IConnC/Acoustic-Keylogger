@@ -37,3 +37,4 @@ Utilizes Multi-Label Binary Encoding for dataset
 2. Implement
 
 ### Split audio recording samples into windows
+Use techniques like majority voting, thresholding, or non-maximum suppression (NMS) to combine predictions and avoid duplicate detections.

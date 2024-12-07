@@ -31,10 +31,25 @@ def multi_label_binary_encode_tensor(tf, instance_labels):
     return binary_vector
 
 def multi_label_binary_decode_tensor(tf, binary_vector):
-    # binary_vector = binary_vector.numpy()
     ALL_LABELS = GET_ALL_LABELS(tf)
-    decoded_labels = [ALL_LABELS[i] for i, val in enumerate(binary_vector) if val == 1]
+    
+    # Ensure binary_vector is a numpy array for iteration
+    binary_array = binary_vector.numpy()
+    
+    # Decode labels based on binary vector
+    decoded_labels = [
+        ALL_LABELS[i].numpy().decode("utf-8")  # Convert TensorFlow tensor to Python string
+        for i, val in enumerate(binary_array) if val == 1
+    ]
+    
     return decoded_labels
+
+
+# def multi_label_binary_decode_tensor(tf, binary_vector):
+#     # binary_vector = binary_vector.numpy()
+#     ALL_LABELS = GET_ALL_LABELS(tf)
+#     decoded_labels = [ALL_LABELS[i] for i, val in enumerate(binary_vector) if val == 1]
+#     return decoded_labels
 
 def get_waveform(tf, filepath):
     audio_binary = tf.io.read_file(filepath)
