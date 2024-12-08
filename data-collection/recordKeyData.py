@@ -6,8 +6,8 @@ import time
 keys_down = []
 
 recorded_data = []
-ALL_LABELS = ['Rctrl', 'p', 'g', 'slash', '7', 'equal', 'w', 'a', 'dash', 'caps', 'l', 'd', 'backspace', 'bracketclose', 'z', '1', 'Rshift', 'comma', 'c', 'tab', 'b', 'j', 'Lctrl', 'n', 't', 'f', 'm', 'o', 'apostrophe', 'y', '8', 'space', 'backslash', 's', '9', 'i', 'r', 'bracketopen', 'semicolon', 'q', '5', 'k', '3', 'x', '4', '6', '2', 'Lshift', 'backtick', 'enter', 'fullstop', 'e', '0', 'h', 'v', 'u']
-mapped_cases = ['right ctrl', 'p', 'g', '/', '7', '=', 'w', 'a', '-', 'caps lock', 'l', 'd', 'backspace', ']', 'z', '1', 'right shift', ',', 'c', 'tab', 'b', 'j', 'ctrl', 'n', 't', 'f', 'm', 'o', '\'', 'y', '8', 'space', '\\', 's', '9', 'i', 'r', '[', ';', 'q', '5', 'k', '3', 'x', '4', '6', '2', 'shift', '`', 'enter', '.', 'e', '0', 'h', 'v', 'u']
+ALL_LABELS = ['p', 'g', 'slash', '7', 'equal', 'w', 'a', 'dash', 'caps', 'l', 'd', 'backspace', 'bracketclose', 'z', '1', 'comma', 'c', 'tab', 'b', 'j', 'Lctrl', 'n', 't', 'f', 'm', 'o', 'apostrophe', 'y', '8', 'space', 'backslash', 's', '9', 'i', 'r', 'bracketopen', 'semicolon', 'q', '5', 'k', '3', 'x', '4', '6', '2', 'Lshift', 'backtick', 'enter', 'fullstop', 'e', '0', 'h', 'v', 'u']
+mapped_cases = ['p', 'g', '/', '7', '=', 'w', 'a', '-', 'caps lock', 'l', 'd', 'backspace', ']', 'z', '1', ',', 'c', 'tab', 'b', 'j', 'ctrl', 'n', 't', 'f', 'm', 'o', '\'', 'y', '8', 'space', '\\', 's', '9', 'i', 'r', '[', ';', 'q', '5', 'k', '3', 'x', '4', '6', '2', 'shift', '`', 'enter', '.', 'e', '0', 'h', 'v', 'u']
 
 if (len(ALL_LABELS) != len(mapped_cases)):
     print("Mismatch in label matching!")
