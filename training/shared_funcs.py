@@ -1,5 +1,7 @@
+import numpy as np
+
 def GET_ALL_LABELS(tf):
-    return tf.constant(['Rctrl', 'p', 'esc', 'g', 'slash', 'down', '7', 'equal', 'w', 'a', 'dash', 'caps', 'l', 'd', 'backspace', 'bracketclose', 'z', '1', 'end', 'Rshift', 'comma', 'c', 'tab', 'b', 'j', 'right', 'Lctrl', 'n', 't', 'f', 'm', 'o', 'apostrophe', 'y', '8', 'space', 'backslash', 's', '9', 'i', 'r', 'bracketopen', 'semicolon', 'q', '5', 'k', '3', 'x', '4', '6', '2', 'Lshift', 'left', 'backtick', 'enter', 'fullstop', 'e', '0', 'h', 'v', 'up', 'u', 'delete'], dtype=tf.string)
+    return tf.constant(['Rctrl', 'p', 'esc', 'g', 'slash', 'down', '7', 'equal', 'w', 'a', 'dash', 'caps', 'l', 'd', 'backspace', 'bracketclose', 'z', '1', 'Rshift', 'comma', 'c', 'tab', 'b', 'j', 'right', 'Lctrl', 'n', 't', 'f', 'm', 'o', 'apostrophe', 'y', '8', 'space', 'backslash', 's', '9', 'i', 'r', 'bracketopen', 'semicolon', 'q', '5', 'k', '3', 'x', '4', '6', '2', 'Lshift', 'left', 'backtick', 'enter', 'fullstop', 'e', '0', 'h', 'v', 'up', 'u', 'delete'], dtype=tf.string)
 
 # Encodes a list of instance labels into a binary vector
 def multi_label_binary_encode_tensor(tf, instance_labels):
@@ -33,8 +35,15 @@ def multi_label_binary_encode_tensor(tf, instance_labels):
 def multi_label_binary_decode_tensor(tf, binary_vector):
     ALL_LABELS = GET_ALL_LABELS(tf)
     
-    # Ensure binary_vector is a numpy array for iteration
-    binary_array = binary_vector.numpy()
+    # Ensure binary_vector is converted to a 1D NumPy array if it's not already
+    if isinstance(binary_vector, tf.Tensor):
+        binary_array = binary_vector.numpy()
+    elif isinstance(binary_vector, (int, np.integer)):  # Handle scalar case
+        binary_array = np.array([binary_vector])
+    elif isinstance(binary_vector, (list, np.ndarray)):
+        binary_array = np.array(binary_vector)
+    else:
+        raise TypeError(f"Unsupported type for binary_vector: {type(binary_vector)}")
     
     # Decode labels based on binary vector
     decoded_labels = [
@@ -43,7 +52,6 @@ def multi_label_binary_decode_tensor(tf, binary_vector):
     ]
     
     return decoded_labels
-
 
 # def multi_label_binary_decode_tensor(tf, binary_vector):
 #     # binary_vector = binary_vector.numpy()

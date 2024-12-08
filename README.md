@@ -38,3 +38,12 @@ Utilizes Multi-Label Binary Encoding for dataset
 
 ### Split audio recording samples into windows
 Use techniques like majority voting, thresholding, or non-maximum suppression (NMS) to combine predictions and avoid duplicate detections.
+
+
+# Issues
+
+Found that processing entire second in model is unecessary and makes learning harder
+    Split spectrograms into groups of 5 frames with length 5ms
+
+Found that the difference in timestamp between audio recording and audio
+

@@ -1,8 +1,6 @@
 training/MKA datasets/
 training/__pycache__/
 .venv-raspi/
-raspi/output
-victim/output
 data-manipulation/MKA datasets
 data-manipulation/supp/
 data-manipulation/supp_dataset/
