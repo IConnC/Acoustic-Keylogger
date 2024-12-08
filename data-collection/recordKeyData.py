@@ -20,7 +20,7 @@ def on_event(key):
             print(actual_key)
             print(datetime.datetime.fromtimestamp(key.time))
             keys_down.append(actual_key)
-            recorded_data.append({"keypress": cases[mapped_cases.index(actual_key)], "time": key.time})
+            recorded_data.append({"keypress": ALL_LABELS[mapped_cases.index(actual_key)], "time": key.time})
             
     if key.event_type == "up" and actual_key in mapped_cases:
         try:
