@@ -47,3 +47,11 @@ Found that processing entire second in model is unecessary and makes learning ha
 
 Found that the difference in timestamp between audio recording and audio
 
+**Letters:**
+a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z
+
+**Numbers:**
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+
+**Punctuation and Symbols:**
+apostrophe (’), backslash (), backtick (`), bracketclose (]), bracketopen ([), comma (,), dash (-), equal (=), fullstop (.), semicolon (;), slash (/)
