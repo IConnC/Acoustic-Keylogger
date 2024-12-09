@@ -1,5 +1,6 @@
 training/MKA datasets/
 training/__pycache__/
+training/model.tflite
 .venv-raspi/
 data-manipulation/MKA datasets
 data-manipulation/supp/
