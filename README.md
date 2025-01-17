@@ -1,57 +1,11 @@
+# Acoustic Keylogger
+Acoustic keylogging, a form of side channel attack, represents a growing cybersecurity threat. This project introduces a lightweight, real-time Convolutional Neural Network (CNN) model designed for generalized acoustic keylogging on embedded systems with computational resource constraints. By utilizing a custom dataset, this model can predict keypresses from keyboard acoustic audio with a test accuracy of ~51% and precision of around ~82%. This project also consists of a keylogger, audio recorder, and data preprocessing component that allows for an accurate collection of training data for the acoustic keylogging model. This proof of concept emphasizes the need for further acoustic keylogging research for more robust safeguards against this type of side channel attack.
 
-# MKA Dataset Info
+## data-collection
+Contains methods for data collection from a microphone and a python based keylogger for the dataset
 
-## Longer than 1 second
-./MKA datasets/hp/Sound Segment(wav)/dash/dash(-)(4).wav
+## data-manipulation
+Processes the data collected from data-collection scripts and matches keypresses with their acoustic signatures
 
-## Shorter than 1 second
-./MKA datasets/hp/Sound Segment(wav)/right/right6.wav
-
-100 ms of recordings -> latency
-
-
-# TODO
-1. Keylogger data collection
-2. Splice keylogger and audio recorder data
-3. Preprocess audio for supplementary data
-4. 
-
-
-
-# Project Segments
-
-## Rasperry Pi
-### Collect Training Data (Audio Recording)
-Audio Recorder: `raspi/collectData.py` - Completed
-
-## Victim Computer
-### Collect Training Data (Keylogger)
-Keylogger: `victim/collectTrainData.py`
-
-## Training Segment
-### Model
-Model: `training/model.py`
-Utilizes Multi-Label Binary Encoding for dataset
-**Todo**:
-1. Implement Sliding Window
-2. Implement
-
-### Split audio recording samples into windows
-Use techniques like majority voting, thresholding, or non-maximum suppression (NMS) to combine predictions and avoid duplicate detections.
-
-
-# Issues
-
-Found that processing entire second in model is unecessary and makes learning harder
-    Split spectrograms into groups of 5 frames with length 5ms
-
-Found that the difference in timestamp between audio recording and audio
-
-**Letters:**
-a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z
-
-**Numbers:**
-0, 1, 2, 3, 4, 5, 6, 7, 8, 9
-
-**Punctuation and Symbols:**
-apostrophe (’), backslash (), backtick (`), bracketclose (]), bracketopen ([), comma (,), dash (-), equal (=), fullstop (.), semicolon (;), slash (/)
+## training
+model.ipynb contains the CNN model, training, and testing code for the project
